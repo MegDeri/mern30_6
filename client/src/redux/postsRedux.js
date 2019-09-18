@@ -1,3 +1,8 @@
+import axios from 'axios';
+// action name creator
+const reducerName = 'posts';
+const createActionName = name => `app/${reducerName}/${name}`;
+
 /* SELECTORS */
 export const getPosts = ({ posts }) => posts;
 
@@ -9,19 +14,15 @@ export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const loadPostsRequest = () => {
     return dispatch => {
   
-      console.log('Request started...');
-      setTimeout(() => {
-        const arr = [{ id: 'a3fssdc1', title: 'Test', content: 'Lorem Ipsum' }];
-        dispatch(loadPosts(arr));
-        console.log('Request finished after 2sec!');
-      }, 2000);
+      axios.get(`${API_URL}/posts`).then(res => {
+        dispatch(loadPosts(res.data));
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   
     };
   };
-
-// action name creator
-const reducerName = 'posts';
-const createActionName = name => `app/${reducerName}/${name}`;
 
 /* INITIAL STATE */
 const initialState = [];
