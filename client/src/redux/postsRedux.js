@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL } from '../config';
 // action name creator
 const reducerName = 'posts';
 const createActionName = name => `app/${reducerName}/${name}`;
