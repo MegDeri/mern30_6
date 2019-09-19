@@ -5,6 +5,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 /* SELECTORS */
 export const getPosts = ({ posts }) => posts;
+export const counterPosts = ({posts}) => posts.length;
 
 /* ACTIONS */
 export const LOAD_POSTS = createActionName('LOAD_POSTS');
@@ -12,14 +13,16 @@ export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 
 /* THUNKS */
 export const loadPostsRequest = () => {
-    return dispatch => {
+    return async dispatch => {
   
-      axios.get(`${API_URL}/posts`).then(res => {
+      try {
+  
+        let res = await axios.get(`${API_URL}/posts`);
         dispatch(loadPosts(res.data));
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
+  
+      } catch(e) {
+        console.log(e.message);
+      }
   
     };
   };
