@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { counterPosts } from '../../../redux/postsRedux';
-import PostsCounter from './PostsCounter';
+import PostsCounter from './PostCounter';
 
 const mapStateToProps = state => ({
     counter: counterPosts(state),
